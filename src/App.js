@@ -40,7 +40,7 @@ const App = () => {
 
   return (
     <BrowserRouter>
-      <UserContext.Provider value={ user }>
+      <UserContext.Provider value={{ isLoggedIn, user }}>
         { router }
       </UserContext.Provider>
     </BrowserRouter>

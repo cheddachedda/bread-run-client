@@ -5,7 +5,7 @@ import { UserContext } from '../../context';
 const Home = () => {
   return (
     <UserContext.Consumer>
-      {(value) => (
+      {({ isLoggedIn, user }) => (
 
         <main>
           <h1>Home Page</h1>
