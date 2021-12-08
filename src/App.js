@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 
+import { UserContext } from './context';
 import { router } from './routes';
 import API from './api/helpers';
 
@@ -39,7 +40,9 @@ const App = () => {
 
   return (
     <BrowserRouter>
-      { router }
+      <UserContext.Provider value={ user }>
+        { router }
+      </UserContext.Provider>
     </BrowserRouter>
   );
 }
