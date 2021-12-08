@@ -3,10 +3,17 @@ import axios from 'axios';
 const SERVER_URL = 'http://localhost:3001';
 
 const API = {
-  getLoginStatus () {
+  getLoginStatus() {
     return axios(SERVER_URL + '/logged_in', {
       withCredentials: true // Allows Rails server to get and read the HTTP cookie
     });
+  },
+
+  login(user) {
+    return axios.post(SERVER_URL + '/login',
+      { user },
+      { withCredentials: true }
+    );
   }
 };
 
