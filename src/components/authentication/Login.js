@@ -1,15 +1,20 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import API from '../../api/helpers';
 
-const Login = ({ handleLogin }) => {
+const Login = ({ handleLogin, isLoggedIn }) => {
   const [ username, setUsername ] = useState('');
   const [ email, setEmail ] = useState('');
   const [ password, setPassword ] = useState('');
   const [ errors, setErrors ] = useState('');
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    // Automatically redirects an already-logged-in user to Home
+    isLoggedIn && navigate('/');
+  }, []);
 
   // Sets state whenever each field receives input
   const _handleChange = (event) => {
