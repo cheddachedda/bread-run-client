@@ -1,12 +1,17 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
-const Login = () => {
+import API from '../../../api/helpers';
+
+const Login = ({ handleLogin }) => {
   const [ username, setUsername ] = useState('');
   const [ email, setEmail ] = useState('');
   const [ password, setPassword ] = useState('');
   const [ errors, setErrors ] = useState('');
 
+  const navigate = useNavigate();
+
+  // Sets state whenever each field receives input
   const _handleChange = (event) => {
     const { name, value } = event.target;
     if (name === 'username') setUsername(value);
@@ -16,6 +21,27 @@ const Login = () => {
 
   const _handleSubmit = (event) => {
     event.preventDefault();
+
+    API.login({ username, email, password }).then((res) => {
+      if (res.data.logged_in) {
+        handleLogin(res.data);
+        navigate('/');
+      } else {
+        setErrors(res.data.errors);
+      }
+    }).catch((err) => {
+      console.error('api errors:', err);
+    });
+  };
+
+  const _handleErrors = () => {
+    return (
+      <ul>
+        { errors.map((err) => (
+          <li key={ err }>{ err }</li>
+        ))}
+      </ul>
+    );
   };
 
   return (
@@ -56,6 +82,10 @@ const Login = () => {
         </div>
 
       </form>
+
+      <div>
+        { errors && _handleErrors() }
+      </div>
     </main>
   );
 };

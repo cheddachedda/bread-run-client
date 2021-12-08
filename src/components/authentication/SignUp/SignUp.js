@@ -1,12 +1,16 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
-const SignUp = () => {
+import API from '../../../api/helpers';
+
+const SignUp = ({ handleLogin }) => {
   const [ username, setUsername ] = useState('');
   const [ email, setEmail ] = useState('');
   const [ password, setPassword ] = useState('');
   const [ passwordConfirmation, setPasswordConfirmation ] = useState('');
   const [ errors, setErrors ] = useState('');
+
+  const navigate = useNavigate();
 
   const _handleChange = (event) => {
     const { name, value } = event.target;
@@ -18,6 +22,27 @@ const SignUp = () => {
 
   const _handleSubmit = (event) => {
     event.preventDefault();
+
+    API.login({ username, email, password, passwordConfirmation }).then((res) => {
+      if (res.data.status === 'created') {
+        handleLogin(res.data);
+        navigate('/');
+      } else {
+        setErrors(res.data.errors);
+      }
+    }).catch((err) => {
+      console.error('api errors:', err);
+    });
+  };
+
+  const _handleErrors = () => {
+    return (
+      <ul>
+        { errors.map((err) => (
+          <li key={ err }>{ err }</li>
+        ))}
+      </ul>
+    );
   };
 
   return (
@@ -58,7 +83,7 @@ const SignUp = () => {
         />
 
         <button type="submit">
-          Log in
+          Sign up
         </button>
 
         <div>
@@ -66,6 +91,10 @@ const SignUp = () => {
         </div>
 
       </form>
+
+      <div>
+        { errors && _handleErrors() }
+      </div>
     </main>
   );
 };
