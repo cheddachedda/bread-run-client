@@ -14,6 +14,13 @@ const API = {
       { user },
       { withCredentials: true }
     );
+  },
+
+  signUp(user) {
+    return axios.post(SERVER_URL + '/users',
+      { user },
+      { withCredentials: true }
+    );
   }
 };
 

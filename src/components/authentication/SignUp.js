@@ -23,7 +23,7 @@ const SignUp = ({ handleLogin }) => {
   const _handleSubmit = (event) => {
     event.preventDefault();
 
-    API.login({ username, email, password, passwordConfirmation }).then((res) => {
+    API.signUp({ username, email, password, passwordConfirmation }).then((res) => {
       if (res.data.status === 'created') {
         handleLogin(res.data);
         navigate('/');
@@ -76,7 +76,7 @@ const SignUp = ({ handleLogin }) => {
 
         <input
           placeholder="confirm password"
-          type="passwordConfirmation"
+          type="password"
           name="passwordConfirmation"
           value={ passwordConfirmation }
           onChange={ _handleChange }
