@@ -1,30 +1,29 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
-import API from '../../../api/helpers';
+import API from '../../api/helpers';
 
-const SignUp = ({ handleLogin }) => {
+const Login = ({ handleLogin }) => {
   const [ username, setUsername ] = useState('');
   const [ email, setEmail ] = useState('');
   const [ password, setPassword ] = useState('');
-  const [ passwordConfirmation, setPasswordConfirmation ] = useState('');
   const [ errors, setErrors ] = useState('');
 
   const navigate = useNavigate();
 
+  // Sets state whenever each field receives input
   const _handleChange = (event) => {
     const { name, value } = event.target;
     if (name === 'username') setUsername(value);
     if (name === 'email') setEmail(value);
     if (name === 'password') setPassword(value);
-    if (name === 'passwordConfirmation') setPasswordConfirmation(value);
   };
 
   const _handleSubmit = (event) => {
     event.preventDefault();
 
-    API.login({ username, email, password, passwordConfirmation }).then((res) => {
-      if (res.data.status === 'created') {
+    API.login({ username, email, password }).then((res) => {
+      if (res.data.logged_in) {
         handleLogin(res.data);
         navigate('/');
       } else {
@@ -47,7 +46,7 @@ const SignUp = ({ handleLogin }) => {
 
   return (
     <main>
-      <h1>Sign up</h1>
+      <h1>Log in</h1>
 
       <form onSubmit={ _handleSubmit }>
         <input
@@ -74,20 +73,12 @@ const SignUp = ({ handleLogin }) => {
           onChange={ _handleChange }
         />
 
-        <input
-          placeholder="confirm password"
-          type="passwordConfirmation"
-          name="passwordConfirmation"
-          value={ passwordConfirmation }
-          onChange={ _handleChange }
-        />
-
         <button type="submit">
-          Sign up
+          Log in
         </button>
 
         <div>
-          Already have an account? <Link to='/login'>Log in</Link>
+          Don't have an account? <Link to='/signup'>Sign up</Link>
         </div>
 
       </form>
@@ -99,4 +90,4 @@ const SignUp = ({ handleLogin }) => {
   );
 };
 
-export default SignUp;
+export default Login;
