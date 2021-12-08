@@ -24,6 +24,7 @@ const Login = ({ handleLogin, isLoggedIn }) => {
     if (name === 'password') setPassword(value);
   };
 
+  // Logs user in
   const _handleSubmit = (event) => {
     event.preventDefault();
 
@@ -39,6 +40,7 @@ const Login = ({ handleLogin, isLoggedIn }) => {
     });
   };
 
+  // Renders a list of authentication errors, if any
   const _handleErrors = () => {
     return (
       <ul>

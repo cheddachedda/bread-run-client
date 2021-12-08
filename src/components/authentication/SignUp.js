@@ -12,6 +12,7 @@ const SignUp = ({ handleLogin }) => {
 
   const navigate = useNavigate();
 
+  // Sets state whenever each field receives input
   const _handleChange = (event) => {
     const { name, value } = event.target;
     if (name === 'username') setUsername(value);
@@ -20,6 +21,7 @@ const SignUp = ({ handleLogin }) => {
     if (name === 'passwordConfirmation') setPasswordConfirmation(value);
   };
 
+  // Creates a new user and logs user in
   const _handleSubmit = (event) => {
     event.preventDefault();
 
@@ -35,6 +37,7 @@ const SignUp = ({ handleLogin }) => {
     });
   };
 
+  // Renders a list of authentication errors, if any
   const _handleErrors = () => {
     return (
       <ul>
