@@ -1,0 +1,17 @@
+#map-container {
+  height: 80vh;
+  width: 80vh;
+}
+
+.marker {
+  align-items: center;
+  background-color: #40C9A2;
+  border-radius: 1rem;
+  color: white;
+  display: flex;
+  font-size: 1rem;
+  font-weight: bold;
+  height: 2rem;
+  justify-content: center;
+  width: 2rem;
+}
