@@ -14,7 +14,7 @@ const Login = ({ handleLogin, isLoggedIn }) => {
   useEffect(() => {
     // Automatically redirects an already-logged-in user to Home
     isLoggedIn && navigate('/');
-  }, []);
+  }, [ isLoggedIn, navigate ]);
 
   // Sets state whenever each field receives input
   const _handleChange = (event) => {

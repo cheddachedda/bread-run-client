@@ -1,11 +1,9 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import API from '../../api/helpers';
 import { UserContext } from '../../context';
 
 const Home = ({ handleLogout, loggedInStatus }) => {
-  const navigate = useNavigate();
-
   // Destroys current session in backend and removes
   const _handleClick = () => {
     API.logout().then(() => {
@@ -24,7 +22,7 @@ const Home = ({ handleLogout, loggedInStatus }) => {
           <p>User: { user && user.username }</p>
           {
             loggedInStatus ?
-            <a onClick={ _handleClick }>Log out</a> :
+            <button onClick={ _handleClick }>Log out</button> :
             <Link to='/login'>Log in</Link>
           }
           <Link to='/signup'>Sign Up</Link>
