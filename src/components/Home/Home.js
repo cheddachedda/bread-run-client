@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
 
+import Map from '../Map/Map';
+
 import API from '../../api/helpers';
 import { UserContext } from '../../context';
 
@@ -26,6 +28,7 @@ const Home = ({ handleLogout, loggedInStatus }) => {
             <Link to='/login'>Log in</Link>
           }
           <Link to='/signup'>Sign Up</Link>
+          <Map />
         </main>
 
       )}
