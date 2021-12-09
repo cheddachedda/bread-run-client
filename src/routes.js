@@ -8,9 +8,14 @@ import SignUp from './components/authentication/SignUp';
 
 export const router = (
   <UserContext.Consumer>
-    {({ _handleLogin, isLoggedIn }) => (
+    {({ _handleLogin, _handleLogout, isLoggedIn }) => (
       <Routes>
-        <Route exact path='/' element={ <Home /> } />
+        <Route exact path='/' element={
+          <Home
+            handleLogout={ _handleLogout }
+            loggedInStatus={ isLoggedIn }
+          />
+        } />
 
         <Route path='/login' element={
           <Login

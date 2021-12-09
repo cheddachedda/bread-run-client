@@ -21,6 +21,12 @@ const API = {
     );
   },
 
+  logout() {
+    return axios.delete(SERVER_URL + '/logout', {
+      withCredentials: true
+    });
+  },
+
   signUp(user) {
     return axios.post(SERVER_URL + '/users',
       { user },
