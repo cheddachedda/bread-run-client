@@ -1,6 +1,11 @@
 import axios from 'axios';
 
-const SERVER_URL = 'http://localhost:3001';
+let SERVER_URL
+if (process.env.NODE_ENV === 'development') {
+  SERVER_URL = 'http://localhost:3001';
+} else if (process.env.NODE_ENV === 'production') {
+  SERVER_URL = 'https://bread-run-backend.herokuapp.com/';
+}
 
 const API = {
   getLoginStatus() {
